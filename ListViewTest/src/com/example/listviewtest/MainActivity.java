@@ -5,13 +5,12 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -24,6 +23,17 @@ public class MainActivity extends Activity {
 		FruitAdapter adapter = new FruitAdapter(MainActivity.this, R.layout.fruit, fruitList);
 		ListView listView =(ListView)findViewById(R.id.ui_list_view);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Fruit fruit = fruitList.get(position);
+				Toast.makeText(MainActivity.this, fruit.getName(), Toast.LENGTH_SHORT).show();
+				
+			}
+			
+		});
 
 	}
 
@@ -70,18 +80,6 @@ public class MainActivity extends Activity {
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
-	}
+	
 
 }
